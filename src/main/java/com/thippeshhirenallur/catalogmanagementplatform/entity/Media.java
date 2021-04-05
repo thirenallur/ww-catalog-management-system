@@ -5,7 +5,7 @@ import lombok.NoArgsConstructor;
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
-
+import io.swagger.annotations.ApiModelProperty;
 import com.thippeshhirenallur.catalogmanagementplatform.model.Audit;
 
 import java.io.Serializable;
@@ -19,6 +19,7 @@ public class Media extends Audit implements Serializable {
 
 	@Id
 	@Column(name = "MEDIA_ID")
+	@ApiModelProperty(hidden = true)
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer mediaId;
 

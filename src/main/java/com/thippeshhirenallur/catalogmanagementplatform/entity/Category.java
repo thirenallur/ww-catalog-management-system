@@ -5,7 +5,7 @@ import lombok.NoArgsConstructor;
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
-
+import io.swagger.annotations.ApiModelProperty;
 import com.thippeshhirenallur.catalogmanagementplatform.model.Audit;
 
 import java.io.Serializable;
@@ -21,6 +21,7 @@ public class Category extends Audit implements Serializable {
 	@Id
 	@Column(name = "CATEGORY_ID")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@ApiModelProperty(hidden = true)
 	private Integer categoryId;
 
 	@NotEmpty(message = "CATEGORY_NAME cannot be null or empty")
@@ -30,5 +31,6 @@ public class Category extends Audit implements Serializable {
 
 	@OneToMany(cascade = CascadeType.ALL)
 	@JoinColumn(name = "CATEGORY_ID")
+	@ApiModelProperty(hidden = true)
 	private List<SubCategory> subCategories;
 }

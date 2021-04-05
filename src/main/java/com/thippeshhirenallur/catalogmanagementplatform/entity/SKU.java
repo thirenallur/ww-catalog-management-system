@@ -13,7 +13,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
-
+import io.swagger.annotations.ApiModelProperty;
 import com.thippeshhirenallur.catalogmanagementplatform.model.Audit;
 
 import lombok.Data;
@@ -29,6 +29,7 @@ public class SKU extends Audit implements Serializable {
 	@Id
 	@Column(name = "SKU_ID")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@ApiModelProperty(hidden = true)
 	private Integer skuId;
 	
 	@NotEmpty(message = "NAME cannot be null or empty")

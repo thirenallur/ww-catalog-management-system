@@ -5,7 +5,7 @@ import lombok.NoArgsConstructor;
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
-
+import io.swagger.annotations.ApiModelProperty;
 import com.thippeshhirenallur.catalogmanagementplatform.model.Audit;
 
 import java.io.Serializable;
@@ -21,6 +21,7 @@ public class Product extends Audit implements Serializable {
 	@Id
 	@Column(name = "PRODUCT_ID")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@ApiModelProperty(hidden = true)
 	private Integer productId;
 
 	@NotEmpty(message = "PRODUCT_NAME cannot be null or empty")

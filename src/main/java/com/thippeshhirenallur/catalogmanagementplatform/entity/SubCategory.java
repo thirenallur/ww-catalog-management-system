@@ -11,7 +11,7 @@ import com.thippeshhirenallur.catalogmanagementplatform.model.Audit;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
-
+import io.swagger.annotations.ApiModelProperty;
 @Entity
 @Table(name = "SUBCATEGORY")
 @Data
@@ -22,6 +22,7 @@ public class SubCategory extends Audit implements Serializable {
 	@Id
 	@Column(name = "SUBCATEGORY_ID")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@ApiModelProperty(hidden = true)
 	private Integer subCategoryId;
 
 	@NotEmpty(message = "SUBCATEGORY_NAME cannot be null or empty")
