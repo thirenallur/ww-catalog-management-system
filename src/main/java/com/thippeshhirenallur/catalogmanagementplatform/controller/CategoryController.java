@@ -2,6 +2,8 @@ package com.thippeshhirenallur.catalogmanagementplatform.controller;
 
 import java.util.HashMap;
 import java.util.List;
+
+import com.thippeshhirenallur.catalogmanagementplatform.exception.ResourceNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -41,16 +43,21 @@ public class CategoryController {
 	public ResponseEntity<?> getCategoriesByName(@RequestParam  final String categoryName) {
 		List<Category> categories = categoryService.getCategories();
 		Category category = null;
-		for (int x = 0; x<categories.size();x++)
-			if(categories.get(x).getCategoryName().equals(categoryName))
-				category = categories.get(x);
 		HashMap<String, Object> hmap = new HashMap<String, Object>();
-		Integer total_number_products =0;
-		if(category!=null && category.getSubCategories() !=null)
-		for(int x = 0; x < category.getSubCategories().size();x++)
-			total_number_products+=category.getSubCategories().get(x).getProducts().size();
-		    hmap.put("number_of_products", total_number_products);
-		    hmap.put("category", category);
+		if(categories!=null && categories.size()>0){
+			for (int x = 0; x<categories.size();x++)
+				if(categories.get(x).getCategoryName().equals(categoryName))
+					category = categories.get(x);
+			Integer total_number_products =0;
+			if(category.getSubCategories() !=null){
+				for(int x = 0; x < category.getSubCategories().size();x++)
+					total_number_products+=category.getSubCategories().get(x).getProducts().size();
+				hmap.put("number_of_products", total_number_products);
+				hmap.put("category", category);
+			}
+		}else {
+			 throw new ResourceNotFoundException("Category not found");
+		}
 		return new ResponseEntity<HashMap<String, Object>>(hmap, HttpStatus.OK);
 	}
 	
