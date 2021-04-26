@@ -39,7 +39,7 @@ public class CategoryController {
 		return new ResponseEntity<>(categories, HttpStatus.OK);
 	}
 	
-	@GetMapping(value = "categoryName/categoryName")
+	@GetMapping(value = "categoryName")
 	public ResponseEntity<?> getCategoriesByName(@RequestParam  final String categoryName) {
 		List<Category> categories = categoryService.getCategories();
 		Category category = null;
