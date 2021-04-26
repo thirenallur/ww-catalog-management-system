@@ -1,7 +1,11 @@
 package com.thippeshhirenallur.catalogmanagementplatform.controller;
 
+import java.util.HashMap;
 import java.util.List;
 
+import com.thippeshhirenallur.catalogmanagementplatform.entity.Category;
+import com.thippeshhirenallur.catalogmanagementplatform.exception.ResourceNotFoundException;
+import com.thippeshhirenallur.catalogmanagementplatform.service.CategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -25,9 +29,10 @@ import io.swagger.annotations.Api;
 public class ProductController {
 	
 	private final ProductService productService;
+	private  final CategoryService categoryService;
 
 	@Autowired
-	public ProductController(ProductService productService) {
+	public ProductController(ProductService productService,CategoryService categoryService) {
 		super();
 		this.productService = productService;
 	}
@@ -37,7 +42,32 @@ public class ProductController {
 		List<Product> products = productService.getProductsBySubCategoryAndCategory(categoryId, subCategoryId);
 		return new ResponseEntity<>(products, HttpStatus.OK);
 	}
-	
+
+	@GetMapping(value = "/{categoryName}")
+	public ResponseEntity<?> getProducts(@PathVariable final String categoryName) {
+
+//		List<Product> products = productService.getProductsBySubCategoryAndCategory(categoryId, subCategoryId);
+//		return new ResponseEntity<>(products, HttpStatus.OK);
+		List<Category> categories = categoryService.getCategories();
+		Category category = null;
+		HashMap<String, Object> hmap = new HashMap<String, Object>();
+		if(categories!=null && categories.size()>0){
+			for (int x = 0; x<categories.size();x++)
+				if(categories.get(x).getCategoryName().equals(categoryName))
+					category = categories.get(x);
+			Integer total_number_products =0;
+			if(category.getSubCategories() !=null){
+				for(int x = 0; x < category.getSubCategories().size();x++)
+					total_number_products+=category.getSubCategories().get(x).getProducts().size();
+				hmap.put("number_of_products", total_number_products);
+				hmap.put("category", category);
+			}
+		}else {
+			throw new ResourceNotFoundException("Category not found");
+		}
+		return new ResponseEntity<HashMap<String, Object>>(hmap, HttpStatus.OK);
+
+	}
 	@PostMapping(value = "/{categoryId}/{subCategoryId}")
 	public ResponseEntity<Product> addProduct(@RequestBody final Product product,@PathVariable final Integer categoryId, @PathVariable final Integer subCategoryId ) {
 		Product productAdded = productService.addProduct(categoryId, subCategoryId, product);
