@@ -8,4 +8,4 @@ import java.util.*;
 public interface CategoryRepository extends CrudRepository<Category, Integer> {
     public List <Category> findByCategoryName(String categoryName);
 }
-}
+
