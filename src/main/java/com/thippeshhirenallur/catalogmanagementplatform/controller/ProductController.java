@@ -47,8 +47,6 @@ public class ProductController {
 	@GetMapping(value = "/{categoryName}")
 	public ResponseEntity<?> getProducts(@PathVariable final String categoryName) {
 
-//		List<Product> products = productService.getProductsBySubCategoryAndCategory(categoryId, subCategoryId);
-//		return new ResponseEntity<>(products, HttpStatus.OK);
 		List<Category> categories = categoryService.getCategoriesByCategoryName(categoryName);
 		Category category = null;
 		HashMap<String, Object> hmap = new HashMap<String, Object>();
