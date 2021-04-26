@@ -35,6 +35,7 @@ public class ProductController {
 	public ProductController(ProductService productService,CategoryService categoryService) {
 		super();
 		this.productService = productService;
+		this.categoryService = categoryService;
 	}
 	
 	@GetMapping(value = "/{categoryId}/{subCategoryId}")
