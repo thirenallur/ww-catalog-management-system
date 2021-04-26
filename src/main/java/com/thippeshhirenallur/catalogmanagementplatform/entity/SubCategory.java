@@ -8,10 +8,12 @@ import javax.validation.constraints.NotNull;
 
 import com.thippeshhirenallur.catalogmanagementplatform.model.Audit;
 
+import io.swagger.annotations.ApiModelProperty;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
-import io.swagger.annotations.ApiModelProperty;
+
 @Entity
 @Table(name = "SUBCATEGORY")
 @Data
@@ -31,6 +33,7 @@ public class SubCategory extends Audit implements Serializable {
 	
 	@NotNull(message = "CATEGORY_ID cannot be null or empty")
 	@Column(name = "CATEGORY_ID")
+	@ApiModelProperty(hidden = true)
 	private Integer categoryId;
 	
 	@OneToMany(cascade = CascadeType.ALL)

@@ -5,8 +5,10 @@ import lombok.NoArgsConstructor;
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
-import io.swagger.annotations.ApiModelProperty;
+
 import com.thippeshhirenallur.catalogmanagementplatform.model.Audit;
+
+import io.swagger.annotations.ApiModelProperty;
 
 import java.io.Serializable;
 
@@ -33,5 +35,6 @@ public class Media extends Audit implements Serializable {
 
 	@NotNull(message = "PRODUCT_ID cannot be null or empty")
 	@Column(name = "PRODUCT_ID")
+	@ApiModelProperty(hidden = true)
 	private Integer productId;
 }

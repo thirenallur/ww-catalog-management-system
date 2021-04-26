@@ -5,8 +5,10 @@ import lombok.NoArgsConstructor;
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
-import io.swagger.annotations.ApiModelProperty;
+
 import com.thippeshhirenallur.catalogmanagementplatform.model.Audit;
+
+import io.swagger.annotations.ApiModelProperty;
 
 import java.io.Serializable;
 import java.util.List;
@@ -20,8 +22,8 @@ public class Product extends Audit implements Serializable {
 
 	@Id
 	@Column(name = "PRODUCT_ID")
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@ApiModelProperty(hidden = true)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer productId;
 
 	@NotEmpty(message = "PRODUCT_NAME cannot be null or empty")
@@ -42,10 +44,12 @@ public class Product extends Audit implements Serializable {
 	
 	@NotNull(message = "CATEGORY_ID cannot be null or empty")
 	@Column(name = "CATEGORY_ID")
+	@ApiModelProperty(hidden = true)
 	private Integer categoryId;
 	
 	@NotNull(message = "SUBCATEGORY_ID cannot be null or empty")
 	@Column(name = "SUBCATEGORY_ID")
+	@ApiModelProperty(hidden = true)
 	private Integer subcategoryId;
 	
 	@OneToMany(cascade = CascadeType.ALL)
