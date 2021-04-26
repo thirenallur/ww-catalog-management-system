@@ -54,5 +54,13 @@ public class CategoryServiceImpl implements CategoryService {
 		categoryToUpdate.setCategoryName(category.getCategoryName());
 		return categoryToUpdate;
 	}
-	
+
+	public List<Category> getCategoriesByCategoryName(String categoryName) {
+		return StreamSupport.
+				stream(categoryRepository.
+						findByCategoryName(categoryName).
+						spliterator(), false).
+				collect(Collectors.toList());
+	}
+
 }

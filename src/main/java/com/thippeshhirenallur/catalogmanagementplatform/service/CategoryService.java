@@ -9,6 +9,7 @@ import com.thippeshhirenallur.catalogmanagementplatform.entity.Category;
 public interface CategoryService {
 	
 	public List<Category> getCategories();
+	public List<Category> getCategoriesByCategoryName(String categoryName);
 
 	public Category getCategory(Integer categoryId);
 	

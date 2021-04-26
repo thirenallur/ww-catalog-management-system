@@ -49,7 +49,7 @@ public class ProductController {
 
 //		List<Product> products = productService.getProductsBySubCategoryAndCategory(categoryId, subCategoryId);
 //		return new ResponseEntity<>(products, HttpStatus.OK);
-		List<Category> categories = categoryService.getCategories();
+		List<Category> categories = categoryService.getCategoriesByCategoryName(categoryName);
 		Category category = null;
 		HashMap<String, Object> hmap = new HashMap<String, Object>();
 		if(categories!=null && categories.size()>0){
